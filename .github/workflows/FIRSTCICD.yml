@@ -39,7 +39,7 @@ jobs:
 
     
   test:
-    needs: build 
+    
     name: Run PSScriptAnalyzer on Windows
     runs-on: windows-latest
     steps: 
