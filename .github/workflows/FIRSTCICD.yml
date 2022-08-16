@@ -19,6 +19,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -33,4 +35,28 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
-          echo test, and deploy your project.
+          echo test, and deploy your project
+
+    
+  test:
+    needs: build 
+    name: Run PSScriptAnalyzer on Windows
+    runs-on: windows-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - name: Install PSScriptAnalyzer module
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -ErrorAction Stop
+      - name: Get list of rules
+        shell: pwsh
+        run: |
+          Get-ScriptAnalyzerRule
+          
+          
+
+                       
+
+
+    
